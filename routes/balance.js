@@ -15,9 +15,10 @@ let walletWithProvider = new ethers.Wallet(credentials.privateKey, provider);
 
 router.get("/", async function(req, res) {
 	walletWithProvider.getBalance().then((balance) => {
+		const str = parseInt(balance.toString(), 16);
 		console.log("> balance : " + balance);
-		res.json({balance: parseInt(balance, 16)});
-	})
+		res.json({balance: balance});
+	});
 });
 
 /* Exports */
