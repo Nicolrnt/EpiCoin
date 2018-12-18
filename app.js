@@ -7,10 +7,9 @@
 /* Requires */
 const express = require("express");
 const path = require("path");
-const ethers = require("ethers");
-const credentials = require("./config/keys").credentials;
 
 /* Require routes */
+const balance = require("./routes/balance");
 
 /* Create app */
 const app = express();
@@ -22,17 +21,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 /* Use routes */
+app.use("/api/balance", balance);
 
 /* Home */
-let wallet = new ethers.Wallet(credentials.privateKey);
-
-// Connect a wallet to mainnet
-let provider = ethers.getDefaultProvider("ropsten");
-let walletWithProvider = new ethers.Wallet(credentials.privateKey, provider);
-walletWithProvider.getBalance().then((balance) => {
-	console.log("> balance : " + balance);
-})
-
 app.get("/", function(req, res) {
 	res.render("index");
 });
