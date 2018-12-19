@@ -53,6 +53,13 @@ function getUserInformation(email, token) {
     });
 }
 
+function saveValuesToCookie(token, res) {
+	// Parse the identity token
+  
+	// Save the access token in a cookie
+	res.cookie('graph_access_token', token.token.access_token, {maxAge: 3600000, httpOnly: true});
+  }
+
 async function getTokenFromCode(auth_code) {
     let result = await oauth2.authorizationCode.getToken({
         code: auth_code,
@@ -61,34 +68,18 @@ async function getTokenFromCode(auth_code) {
     });
     const token = oauth2.accessToken.create(result);
     let email =  getEmailFromIdToken(token.token.id_token);
-    console.log("TOKEN", user)
+    // console.log("TOKEN", user)
 
-    const User = require('../models/user-model').User;
-
-    User.findOne({email: email}).exec((err, currentUser) => {
-	if (err) return handleError(err);
-
-	if (currentUser) {
-		console.log('Current user: ' + currentUser);
-		done(null, currentUser);
-	} else {
-		var user = new User({
-			username: email,
-			id: token.token.id_token,
-			accessToken: token.token.access_token,
-			wallet: 0,
-			school: "Epitech",
-			avatar: "",
-            email: email,
-		});
-		user.save(function (err) {
-			if (err) console.log(err);
-		});
-	}
-});
    // getUserInformation(user.preferred_username, token.token.access_token);
-    return token.token.access_token;
+   var ret = {
+	   token: token,
+	   email: email,
+	   username: email.substr(0, email.search('@')).replace('.', ' '),
+   }
+   console.log("TEST");
+    return ret;
 }
 
 exports.getTokenFromCode = getTokenFromCode;
 exports.getAuthUrl = getAuthUrl;
+exports.saveValuesToCookie = saveValuesToCookie;
