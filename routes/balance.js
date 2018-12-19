@@ -8,6 +8,30 @@
 const router = require("express").Router();
 const ethers = require("ethers");
 const credentials = require("../config/keys").credentials;
+var authHelper = require('../helpers/auth');
+
+// const User = require('../models/user-model').User;
+
+// User.findOne({id: profile.id}).exec((err, currentUser) => {
+// 	if (err) return handleError(err);
+
+// 	if (currentUser) {
+// 		console.log('Current user: ' + currentUser);
+// 		done(null, currentUser);
+// 	} else {
+// 		var user = new User({
+// 			username: "",
+// 			id: "",
+// 			accessToken: "",
+// 			wallet: 0,
+// 			school: "",
+// 			avatar: "",
+// 		});
+// 		user.save(function (err) {
+// 			if (err) console.log(err);
+// 		});
+// 	}
+// });
 
 /* Balance */
 const provider = ethers.getDefaultProvider("ropsten");

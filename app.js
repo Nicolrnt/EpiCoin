@@ -7,6 +7,13 @@
 /* Requires */
 const express = require("express");
 const path = require("path");
+const mongoose = require('mongoose');
+var index = require('./routes/index');
+var authorize = require('./routes/authorize');
+
+const mongo = require("./config/keys").mongo;
+
+require('dotenv').config();
 
 /* Require routes */
 const balance = require("./routes/balance");
@@ -15,6 +22,10 @@ const balance = require("./routes/balance");
 const app = express();
 const port = 8080;
 
+mongoose.connect(mongo.dbURL, () => {
+	console.log('Connected to mongodb');
+});
+
 /* Set up view engine */
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -22,6 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* Use routes */
 app.use("/api/balance", balance);
+app.use('/authorize', authorize);
 
 /* Home */
 app.get("/", function(req, res) {
