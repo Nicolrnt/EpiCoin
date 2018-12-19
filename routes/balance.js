@@ -8,6 +8,7 @@
 const router = require("express").Router();
 const ethers = require("ethers");
 const credentials = require("../config/keys").credentials;
+var authHelper = require('../helpers/auth');
 
 // const User = require('../models/user-model').User;
 
@@ -43,6 +44,9 @@ router.get("/", async function(req, res) {
 		console.log("> balance : " + balance);
 		console.log("> str : " + str);
 		res.json({balance: str});
+        authHelper.getAuthUrl();
+
+        res.json({balance: balance});
 	});
 });
 
