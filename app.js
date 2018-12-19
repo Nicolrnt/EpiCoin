@@ -19,6 +19,7 @@ require('dotenv').config();
 /* Require routes */
 const balance = require("./routes/balance");
 const profile = require("./routes/profile");
+const sendMoney = require("./routes/sendMoney");
 
 /* Create app */
 const app = express();
@@ -39,6 +40,7 @@ app.use("/api/balance", balance);
 app.use("/api/oauth", oauth);
 app.use("/profile", profile);
 app.use('/authorize', authorize);
+app.use("/api/sendMoney", sendMoney);
 
 /* Home */
 app.get("/", function(req, res) {
