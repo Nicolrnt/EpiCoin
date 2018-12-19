@@ -1,13 +1,13 @@
 /*
 ** Made by : Nicolas Laurent <nicolas-laurent@outlook.fr>
 ** Project : EpiCoin
-** File : balance.js
+** File : sendMoneyModal.js
 */
 
-Vue.component("balance", {
+Vue.component("sendMoneyModal", {
 	template: `
 		<div>
-			<p>Balance : {{ balance }}</p>
+			<p>Wesh Alors</p>
 		</div>
 	`,
 	data: function () {
@@ -20,11 +20,7 @@ Vue.component("balance", {
 	},
 	methods: {
 		getBalance: function () {
-			fetch("/api/balance")
-			.then(response => response.json())
-			.then(response => {
-				this.balance = response.balance;
-			});
+			console.log("Ok");
 		}
 	}
 })
