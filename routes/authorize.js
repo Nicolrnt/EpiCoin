@@ -20,14 +20,14 @@ router.get('/', async function(req, res, next) {
 			User.findOne({email: info.email}).exec((err, currentUser) => {
 			if (err) return handleError(err);
 
-			//authHelper.saveValuesToCookie(info.token, res);
+			authHelper.saveValuesToCookie(info.token, res);
 			if (currentUser) {
 				console.log('Current user: ' + currentUser);
 				// authHelper.saveValuesToCookie(info.token, res);
 				// done(null, currentUser);
 			} else {
 				var user = new User({
-					username: info.email,
+					username: info.username,
 					id: info.token.token.id_token,
 					accessToken: info.token.token.access_token,
 					wallet: 0,
@@ -39,13 +39,12 @@ router.get('/', async function(req, res, next) {
 					if (err) console.log(err);
 				});
 				}
+				res.render('profile', { title: 'Home', debug: `Access token: ${info.token.token.access_token}`, email: info.email, username: info.username });
 			});
         } catch (error) {
 			console.log(error);
             res.render('error', { title: 'Error', message: 'Error exchanging code for token', error: error });
         }
-
-        res.render('index', { title: 'Home', debug: `Access token: ${info.token.token.access_token}` });
     } else {
         // Otherwise complain
         res.render('error', { title: 'Error', message: 'Authorization error', error: { status: 'Missing code parameter' } });

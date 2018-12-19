@@ -55,12 +55,9 @@ function getUserInformation(email, token) {
 
 function saveValuesToCookie(token, res) {
 	// Parse the identity token
-	const user = jwt.decode(token.token.id_token);
   
 	// Save the access token in a cookie
 	res.cookie('graph_access_token', token.token.access_token, {maxAge: 3600000, httpOnly: true});
-	// Save the user's name in a cookie
-	res.cookie('graph_user_name', user.name, {maxAge: 3600000, httpOnly: true});
   }
 
 async function getTokenFromCode(auth_code) {
@@ -77,6 +74,7 @@ async function getTokenFromCode(auth_code) {
    var ret = {
 	   token: token,
 	   email: email,
+	   username: email.substr(0, email.search('@')).replace('.', ' '),
    }
    console.log("TEST");
     return ret;
