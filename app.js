@@ -7,6 +7,9 @@
 /* Requires */
 const express = require("express");
 const path = require("path");
+const mongoose = require('mongoose');
+
+const mongo = require("./config/keys").mongo;
 
 /* Require routes */
 const balance = require("./routes/balance");
@@ -14,6 +17,10 @@ const balance = require("./routes/balance");
 /* Create app */
 const app = express();
 const port = 8080;
+
+mongoose.connect(mongo.dbURL, () => {
+	console.log('Connected to mongodb');
+});
 
 /* Set up view engine */
 app.set("view engine", "ejs");
