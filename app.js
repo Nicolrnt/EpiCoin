@@ -10,18 +10,19 @@ const path = require("path");
 const mongoose = require('mongoose');
 var index = require('./routes/index');
 var authorize = require('./routes/authorize');
-
 const mongo = require("./config/keys").mongo;
 
 require('dotenv').config();
 
 /* Require routes */
 const balance = require("./routes/balance");
+const profile = require("./routes/profile");
 
 /* Create app */
 const app = express();
 const port = 8080;
 
+/* Database Init */
 mongoose.connect(mongo.dbURL, () => {
 	console.log('Connected to mongodb');
 });
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* Use routes */
 app.use("/api/balance", balance);
+app.use("/profile", profile);
 app.use('/authorize', authorize);
 
 /* Home */

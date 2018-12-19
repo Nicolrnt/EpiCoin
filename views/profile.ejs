@@ -8,18 +8,24 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-		<script><%- include("Components/oauth.js") -%></script>
+		<script><%- include("Components/balance.js") -%></script>
 	</head>
 	<body class="is-preload">
 		<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 			<section id="main">
 				<header>
 					<span class="avatar"><img src="images/avatar.jpg" alt="" /></span>
-					<h1>You'r Not Connected !</h1>
+					<h1>Nicolas Laurent</h1>
 				</header>
 				<div id="app" class="container">
+					<balance></balance>
 					<oauth></oauth>
 				</div>
+				<footer>
+					<ul class="icons">
+						<li><a href="#" class="fa fa-money">Send Money</a></li>
+					</ul>
+				</footer>
 			</section>
 		</div>
 		<script>if ('addEventListener' in window) {window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');}</script>
