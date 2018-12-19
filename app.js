@@ -10,6 +10,8 @@ const path = require("path");
 const mongoose = require('mongoose');
 var index = require('./routes/index');
 var authorize = require('./routes/authorize');
+var oauth = require('./routes/oauth');
+
 const mongo = require("./config/keys").mongo;
 
 require('dotenv').config();
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* Use routes */
 app.use("/api/balance", balance);
+app.use("/api/oauth", oauth);
 app.use("/profile", profile);
 app.use('/authorize', authorize);
 

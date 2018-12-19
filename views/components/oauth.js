@@ -1,19 +1,29 @@
 Vue.component("oauth", {
     template: `
 		<div>
-			<a :href="url">
+			<a target="_blank" :href="authUrl">
 				<button>CLICK HERE TO LOGIN</button>
 			</a>
 		</div>
 	`,
     data: function () {
         return ({
-            url: "https://github.com/OfficeDev/Office-Add-in-NodeJS-ServerAuth",
+            authUrl: "",
         })
     },
     created: function () {
         console.log("Tu passes ?")
+        this.getAuthUrl();
 
     },
-    methods: {}
+    methods: {
+        getAuthUrl: function () {
+            fetch("/api/oauth")
+                .then(response => response.json())
+                .then(response => {
+                    console.log("JE SUIS LA REPOSNE", response)
+                    this.authUrl = response.authUrl;
+                });
+        }
+    }
 });
