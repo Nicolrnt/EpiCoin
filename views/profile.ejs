@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="assets/css/my_style.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script><%- include("Components/balance.js") -%></script>
+		<script><%- include("Components/sendMoney.js") -%></script>
 	</head>
 	<body class="is-preload">
 		<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -19,6 +20,7 @@
 				</header>
 				<div id="app" class="container">
 					<balance></balance>
+					<send-money></send-money>
 				</div>
 				<div id="sendMoneyModal" class="modal">
 					<div class="modal-content">
