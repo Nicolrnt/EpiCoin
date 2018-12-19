@@ -7,7 +7,7 @@
 Vue.component("balance", {
 	template: `
 		<div>
-			<p>Balance : {{ balance }}</p>
+			<p>Balance : {{ balance }} EPC</p>
 		</div>
 	`,
 	data: function () {
@@ -23,7 +23,10 @@ Vue.component("balance", {
 			fetch("/api/balance")
 			.then(response => response.json())
 			.then(response => {
-				this.balance = response.balance;
+				console.log("BALANCE", response);
+				let balanceHex = response.balance._hex;
+                let parsed = parseInt(balanceHex, "16");
+				this.balance = parsed / (10 ** 18);
 			});
 		}
 	}
