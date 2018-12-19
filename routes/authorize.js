@@ -23,23 +23,25 @@ router.get('/', async function(req, res, next) {
 			authHelper.saveValuesToCookie(info.token, res);
 			if (currentUser) {
 				console.log('Current user: ' + currentUser);
+				info.avatar = currentUser.avatar;
 				// authHelper.saveValuesToCookie(info.token, res);
 				// done(null, currentUser);
 			} else {
+				info.avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Epitech.png/1200px-Epitech.png";
 				var user = new User({
 					username: info.username,
 					id: info.token.token.id_token,
 					accessToken: info.token.token.access_token,
 					wallet: 0,
 					school: "Epitech",
-					avatar: "",
+					avatar: info.avatar,
 					email: info.email,
 				});
 				user.save(function (err) {
 					if (err) console.log(err);
 				});
 				}
-				res.render('profile', { title: 'Home', debug: `Access token: ${info.token.token.access_token}`, email: info.email, username: info.username });
+				res.render('profile', { title: 'Home', debug: `Access token: ${info.token.token.access_token}`, email: info.email, username: info.username, avatar: info.avatar });
 			});
         } catch (error) {
 			console.log(error);
