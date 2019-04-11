@@ -1,0 +1,2 @@
+# EpiCoin
+EpiCoin Application
